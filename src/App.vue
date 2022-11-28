@@ -1,31 +1,50 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from "vue";
+let message = "hello world";
+const message1 = "<div><h1>Hello World</h1></div>";
+const link = "https://google.com";
+const upperCase = () => {
+  message = message.toUpperCase();
+};
+let isActive = true;
+let isBlack = true;
+let empty = false;
+upperCase();
+const count = ref(0);
+const countUp = () => {
+  count.value += 1;
+};
 </script>
 
 <template>
+  <h1>Vue 3 入門</h1>
+  <p>{{ message.length > 20 ? "Long" : "Short" }}</p>
+  <p v-text="message"></p>
+  <p v-html="message1"></p>
+  <a v-bind:href="link">Google</a>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <a v-bind:class="[isActive ? 'active' : 'underLine']">v-bindの設定方法</a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <div>
+    <p v-if="empty">品切れ中です</p>
+    <p v-else>好評販売中！</p>
+  </div>
+  <div>
+    <button type="button" @click="countUp">+</button>
+    <div>
+      <p>{{ count }}</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
+.active {
+  color: red;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.black {
+  color: black;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.underLine {
+  text-decoration: underline;
 }
 </style>
