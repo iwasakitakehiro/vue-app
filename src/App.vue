@@ -1,39 +1,37 @@
 <script setup>
 import { ref } from "vue";
-let message = "hello world";
-const message1 = "<div><h1>Hello World</h1></div>";
-const link = "https://google.com";
-const upperCase = () => {
-  message = message.toUpperCase();
-};
-let isActive = true;
-let isBlack = true;
-let empty = false;
-upperCase();
+import { reactive } from "vue";
+import { computed } from "vue";
+
 const count = ref(0);
-const countUp = () => {
-  count.value += 1;
+
+const user = reactive({
+  firstName: "jhon",
+  lastName: "Doe",
+});
+const fullName = computed(() => {
+  console.log("computed Propety");
+  return `${Math.random()} ${user.firstName} ${user.lastName}`;
+});
+const fFullName = () => {
+  console.log("function");
+  return `${Math.random()} ${user.firstName} ${user.lastName}`;
 };
 </script>
 
 <template>
-  <h1>Vue 3 入門</h1>
-  <p>{{ message.length > 20 ? "Long" : "Short" }}</p>
-  <p v-text="message"></p>
-  <p v-html="message1"></p>
-  <a v-bind:href="link">Google</a>
+  <h1>Vue 3 基本的な記述</h1>
+  <input v-model="user.firstName" />
+  <input v-model="user.lastName" />
+  <h2>fullName: {{ user.firstName }} {{ user.lastName }}</h2>
+  <h2>fFullName: {{ fFullName() }}</h2>
+  <h2>fFullName: {{ fFullName() }}</h2>
+  <h2>fFullName: {{ fFullName() }}</h2>
+  <h2>fullName: {{ fullName }}</h2>
+  <h2>fullName: {{ fullName }}</h2>
+  <h2>fullName: {{ fullName }}</h2>
   <div>
-    <a v-bind:class="[isActive ? 'active' : 'underLine']">v-bindの設定方法</a>
-  </div>
-  <div>
-    <p v-if="empty">品切れ中です</p>
-    <p v-else>好評販売中！</p>
-  </div>
-  <div>
-    <button type="button" @click="countUp">+</button>
-    <div>
-      <p>{{ count }}</p>
-    </div>
+    <button @click="count++">{{ count }}</button>
   </div>
 </template>
 
