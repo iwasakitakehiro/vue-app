@@ -3,11 +3,12 @@ import { ref } from "vue";
 import firsCompornent from "./components/firstCompornent.vue";
 import second from "./components/second.vue";
 
-const name = ref("たけ");
+const name = ref("");
 </script>
 
 <template>
   <!-- <firsCompornent /> -->
+  <input type="text" v-model="name" />
   <second :name="name" message="propsの使用" />
 </template>
 
