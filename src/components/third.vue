@@ -3,10 +3,21 @@ import { ref } from "vue";
 const props = defineProps({
   name: String,
 });
-const emit = defineEmits(["changeNameEvent"]);
+const name = ref(props.name);
+
+const emit = defineEmits({
+  changeNameEvent: (name) => {
+    console.log(name);
+    return true;
+  },
+});
+
+const changeName = () => {
+  emit("changeNameEvent", name.value);
+};
 </script>
 <template>
   <h2>子コンポーネント</h2>
-  <p>Hello {{ name }}</p>
-  <input type="text" @input="$emit('changeNameEvent', $event.target.value)" />
+  <p>Hello {{ props.name }}</p>
+  <input v-model="name" @input="changeName" />
 </template>
